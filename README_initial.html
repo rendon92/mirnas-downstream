@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta charset="utf-8">
+  <link href="https://markable.in/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://markable.in//static/css/style.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://markable.in/static/editor/css/view_file.css">
+  <link rel="stylesheet" type="text/css" href="https://markable.in/static/css/code.css">
+</head>
+<body>
+  <div class="container">
+    <div id="content">
+      <h1 id="implementation-of-a-pipeline-for-downstream-analysis-of-ngs-data-obtained-after-performing-a-dual-rna-seq-experiment">Implementation of a pipeline for downstream analysis of NGS data obtained after performing a dual RNA-SEQ experiment.</h1>
+<p>The pipeline is divided into several steps, each corresponding to a different directory, which have to be performed sequentially. As we enter into each directory, we will find the instructions written into a README file. The pipeline is divided as follows:</p>
+<ul>
+<li><strong>0_fq-files/</strong> : Here we will need to have our input data as unzipped fastq (.fq) files.</li>
+<li><strong>1_fastqc/</strong> : We will perform a quality control analysis of our input data by using FASTQC. </li>
+<li><strong>2_mapper/</strong> : We will make use of mapper.pl (from miRDeep2 software) to map our reads to a joint index of human and legionella.</li>
+<li><strong>3_quantifier/</strong>: A quick quantification step by using quantifier.pl (from miRDeep2 software)</li>
+<li>
+<p><strong>4_miRDeep/</strong>: prediction of novel miRNAs</p>
+</li>
+<li>
+<p><strong>5_novel-miRNAs/</strong>: processing of miRDeep2.pl output files for further analysis. Matrix of known and novel RCs. Dealing with duplicates.</p>
+</li>
+<li><strong>6_rbb/</strong> : reciprocal best blast hits of the top novel miRNAs against all mammals. Rbb against Legionella as well.</li>
+<li><strong>7_target-pred-and-interaction-networks/</strong> : Differential expression analysis of miRNAs. Target prediction of novel miRNAs. Interaction networks of DE miRNAs - DE targets.</li>
+</ul>
+<p><a href="/project/ngs_marsico/Javier/novel_miRNAs_full_pipeline/4_novel_miRNAs/processed_miRNAs_sequences_coordinates_oneline_head.fa">example of seq+coord in one line</a></p>
+<p>Expected output of step 7 after using cytoscape: 
+<img alt="INTERACTION NETWORK EXAMPLE: GFPPT16" src="/home/rendon/Downloads/gfppt16better.pdf" /></p>
+<p>Put some directories in your .bashrc files, namely:</p>
+<pre><code>    **(mapper.pl, quantifier.pl, miRDeep2.pl)**
+/project/ngs_marsico/Javier/bin/mirdeep2_0_0_8/src/
+
+                    **(fastqc)**
+/project/ngs_marsico/Javier/bin/FastQC/
+</code></pre>
+<p>For all bash files, change source .bashrc to point to your own .bashrc file</p>
+<pre><code>    By default: source /home/rendon/.bashrc
+</code></pre>
+    </div>
+  </div>
+</body>
+</html>
